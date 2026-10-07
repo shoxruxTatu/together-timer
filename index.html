@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 <title>Since August Seventh</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Work+Sans:wght@400;500;600&display=swap');
@@ -45,6 +46,7 @@
   }
 
   *{box-sizing:border-box;}
+  [hidden]{display:none !important;}
   html,body{margin:0;padding:0;}
   body{
     background:
@@ -322,6 +324,188 @@
   .reveal-6{animation-delay:.62s;}
   .reveal-7{animation-delay:.70s;}
   .reveal-8{animation-delay:.78s;}
+  .reveal-9{animation-delay:.86s;}
+  .reveal-10{animation-delay:.94s;}
+
+  /* ---- Mini game ---- */
+  .game-block{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    width:100%;
+  }
+  .game-sub{
+    margin:0;
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:var(--ink-dim);
+  }
+  .profile-picker{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+  }
+  .profile-options{
+    display:flex;
+    gap:14px;
+  }
+  .profile-btn{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    padding:14px 24px;
+    border-radius:16px;
+    border:1px solid var(--line);
+    background:var(--surface);
+    font-size:30px;
+    line-height:1;
+    cursor:pointer;
+    box-shadow:0 10px 24px -14px var(--shadow);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .profile-btn span{
+    font-size:10px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    font-weight:600;
+  }
+  .profile-btn:hover{ transform:translateY(-2px); }
+
+  .game-area{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    width:100%;
+  }
+  .game-wrap{
+    position:relative;
+    width:min(300px, 82vw);
+    aspect-ratio:3/4;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow: 0 18px 40px -12px var(--shadow), 0 0 0 1px var(--line);
+    background:
+      radial-gradient(circle at 25% 15%, color-mix(in srgb, var(--rose-soft) 55%, transparent), transparent 55%),
+      radial-gradient(circle at 80% 75%, color-mix(in srgb, var(--gold-soft) 45%, transparent), transparent 55%),
+      linear-gradient(160deg, var(--surface), var(--bg2));
+    touch-action:none;
+    user-select:none;
+  }
+  #gameCanvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+  }
+  .game-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    text-align:center;
+    background:color-mix(in srgb, var(--surface) 70%, transparent);
+    transition:opacity .25s ease;
+  }
+  .game-overlay.hidden{
+    opacity:0;
+    pointer-events:none;
+  }
+  .overlay-emoji{ font-size:44px; }
+  .game-hint{
+    margin:0;
+    font-size:11px;
+    color:var(--ink-dim);
+  }
+
+  .btn{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:12px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:10px 26px;
+    border-radius:999px;
+    border:none;
+    cursor:pointer;
+    color:#fff8f3;
+    background:linear-gradient(135deg, var(--rose), var(--gold));
+    box-shadow:0 10px 22px -10px var(--shadow);
+    transition:transform .2s ease;
+  }
+  .btn:hover{ transform:translateY(-1px); }
+  .btn:active{ transform:translateY(0); }
+
+  .link-btn{
+    background:none;
+    border:none;
+    padding:0;
+    font-size:11px;
+    color:var(--ink-dim);
+    text-decoration:underline;
+    cursor:pointer;
+  }
+
+  .game-hud{
+    display:flex;
+    gap:24px;
+    font-size:12px;
+    letter-spacing:0.04em;
+    color:var(--ink-dim);
+    font-variant-numeric:tabular-nums;
+  }
+  .game-hud b{
+    color:var(--ink);
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:15px;
+    margin-left:4px;
+  }
+
+  .leaderboard{
+    width:min(300px, 82vw);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding:16px 20px;
+    border-radius:16px;
+    background:var(--surface);
+    box-shadow:0 10px 26px -16px var(--shadow), 0 0 0 1px var(--line);
+  }
+  .lb-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .lb-emoji{ font-size:17px; }
+  .lb-name{
+    flex:1;
+    font-size:12px;
+    color:var(--ink-dim);
+  }
+  .lb-score{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:17px;
+    color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .lb-row.leading .lb-score{ color:var(--rose); }
+  .lb-sync{
+    margin:2px 0 0;
+    font-size:10px;
+    text-align:center;
+    color:var(--ink-dim);
+    opacity:0.75;
+  }
 
   @media (prefers-reduced-motion: reduce){
     *{transition:none !important; animation:none !important;}
@@ -368,6 +552,45 @@
       <canvas class="scratch-canvas" id="scratchCanvas"></canvas>
     </div>
     <span class="scratch-caption" id="scratchCaption">scratch the card to reveal it</span>
+  </div>
+
+  <div class="divider reveal reveal-9" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 21s-7.5-4.7-10-9.3C.4 8 2 4.5 5.6 4c2.2-.3 4 .8 6.4 3.3C14.4 4.8 16.2 3.7 18.4 4c3.6.5 5.2 4 3.6 7.7C19.5 16.3 12 21 12 21z"/></svg>
+  </div>
+
+  <div class="game-block reveal reveal-10" id="gameBlock">
+    <span class="eyebrow" style="color:var(--gold)">A little game</span>
+
+    <div class="profile-picker" id="profilePicker">
+      <p class="game-sub">Who's flying?</p>
+      <div class="profile-options">
+        <button class="profile-btn" data-profile="groom" data-emoji="🤵" type="button">🤵<span>Groom</span></button>
+        <button class="profile-btn" data-profile="bride" data-emoji="👰" type="button">👰<span>Bride</span></button>
+      </div>
+    </div>
+
+    <div class="game-area" id="gameArea" hidden>
+      <div class="game-wrap" id="gameWrap">
+        <canvas id="gameCanvas"></canvas>
+        <div class="game-overlay" id="gameOverlay">
+          <div class="overlay-emoji" id="overlayEmoji">🤵</div>
+          <button class="btn" id="playBtn" type="button">Play</button>
+          <p class="game-hint">tap or press space to fly</p>
+        </div>
+      </div>
+      <div class="game-hud">
+        <span>Score <b id="liveScore">0</b></span>
+        <span>Best <b id="liveBest">0</b></span>
+      </div>
+      <button class="link-btn" id="switchProfile" type="button">switch player</button>
+    </div>
+
+    <div class="leaderboard" id="leaderboard">
+      <p class="game-sub">Leaderboard</p>
+      <div class="lb-row" id="lbRowGroom"><span class="lb-emoji">🤵</span><span class="lb-name">Groom</span><span class="lb-score" id="lbGroom">0</span></div>
+      <div class="lb-row" id="lbRowBride"><span class="lb-emoji">👰</span><span class="lb-name">Bride</span><span class="lb-score" id="lbBride">0</span></div>
+      <p class="lb-sync" id="lbSync">saved on this device</p>
+    </div>
   </div>
 
 </div>
@@ -820,5 +1043,332 @@
       e.preventDefault();
     }
   });
+})();
+</script>
+
+<script>
+(function(){
+  // ---------- Shared leaderboard (Supabase) ----------
+  var SUPA_URL = "https://klltvqsnbqbwrjushgcv.supabase.co";
+  var SUPA_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtsbHR2cXNuYnFid3JqdXNoZ2N2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTExODM0MzUsImV4cCI6MjEwNjc1OTQzNX0.Sd6MmgqrDN0Ly3E_Gro_ndTwWYVKee1R0zffw35abyo";
+  var SUPA_TABLE_URL = SUPA_URL + "/rest/v1/timer_scores";
+
+  var LB = { groom: 0, bride: 0 };
+  var useCloud = !!(SUPA_URL && SUPA_ANON_KEY);
+
+  var lbGroomEl = document.getElementById('lbGroom');
+  var lbBrideEl = document.getElementById('lbBride');
+  var lbSyncEl = document.getElementById('lbSync');
+  var lbRowGroom = document.getElementById('lbRowGroom');
+  var lbRowBride = document.getElementById('lbRowBride');
+
+  function localBest(profile){
+    return parseInt(localStorage.getItem('ttBest_' + profile) || '0', 10);
+  }
+
+  function renderLeaderboard(){
+    lbGroomEl.textContent = LB.groom;
+    lbBrideEl.textContent = LB.bride;
+    lbRowGroom.classList.toggle('leading', LB.groom > LB.bride);
+    lbRowBride.classList.toggle('leading', LB.bride > LB.groom);
+    lbSyncEl.textContent = useCloud ? 'synced live • both phones' : 'saved on this device';
+    if(gameArea && !gameArea.hidden && currentProfile){
+      liveBestEl.textContent = LB[currentProfile] || 0;
+    }
+  }
+
+  function supaHeaders(extra){
+    var h = {
+      'apikey': SUPA_ANON_KEY,
+      'Authorization': 'Bearer ' + SUPA_ANON_KEY
+    };
+    if(extra){ for(var k in extra){ h[k] = extra[k]; } }
+    return h;
+  }
+
+  function fetchLeaderboard(){
+    if(!useCloud){
+      LB.groom = localBest('groom');
+      LB.bride = localBest('bride');
+      renderLeaderboard();
+      return;
+    }
+    fetch(SUPA_TABLE_URL + '?id=eq.flappy&select=groom,bride', { headers: supaHeaders() })
+      .then(function(r){ if(!r.ok) throw new Error('bad status ' + r.status); return r.json(); })
+      .then(function(rows){
+        var row = rows && rows[0];
+        if(row){
+          LB.groom = row.groom || 0;
+          LB.bride = row.bride || 0;
+        }
+        renderLeaderboard();
+      })
+      .catch(function(e){
+        console.warn('leaderboard fetch failed, falling back to local', e);
+        useCloud = false;
+        LB.groom = localBest('groom');
+        LB.bride = localBest('bride');
+        renderLeaderboard();
+      });
+  }
+
+  function submitScore(profile, score){
+    if(score <= (LB[profile] || 0)) return;
+    LB[profile] = score;
+    renderLeaderboard();
+    if(useCloud){
+      var body = {};
+      body[profile] = score;
+      fetch(SUPA_TABLE_URL + '?id=eq.flappy&' + profile + '=lt.' + score, {
+        method: 'PATCH',
+        headers: supaHeaders({ 'Content-Type': 'application/json', 'Prefer': 'return=minimal' }),
+        body: JSON.stringify(body)
+      }).catch(function(e){
+        console.warn('failed to save score to cloud', e);
+      });
+    } else {
+      localStorage.setItem('ttBest_' + profile, String(score));
+    }
+  }
+
+  function initLeaderboard(){
+    fetchLeaderboard();
+    if(useCloud){
+      setInterval(fetchLeaderboard, 12000);
+    }
+  }
+
+  // ---------- Flappy-style mini game ----------
+  var profilePicker = document.getElementById('profilePicker');
+  var gameArea = document.getElementById('gameArea');
+  var gameWrap = document.getElementById('gameWrap');
+  var canvas = document.getElementById('gameCanvas');
+  var gctx = canvas.getContext('2d');
+  var overlay = document.getElementById('gameOverlay');
+  var overlayEmoji = document.getElementById('overlayEmoji');
+  var playBtn = document.getElementById('playBtn');
+  var switchBtn = document.getElementById('switchProfile');
+  var liveScoreEl = document.getElementById('liveScore');
+  var liveBestEl = document.getElementById('liveBest');
+  var profileBtns = document.querySelectorAll('.profile-btn');
+
+  var gdpr = Math.min(window.devicePixelRatio || 1, 2);
+  var currentProfile = null;
+  var currentEmoji = '🤴';
+  var W = 0, H = 0;
+  var GRAVITY = 0, FLAP_V = 0, PIPE_W = 0, GAP = 0, SPEED = 0;
+  var bird = { x:0, y:0, vy:0, r:16 };
+  var pipes = [];
+  var score = 0;
+  var running = false;
+  var started = false;
+  var rafId = null;
+  var lastTime = 0;
+
+  function sizeGameCanvas(){
+    var rect = gameWrap.getBoundingClientRect();
+    W = rect.width; H = rect.height;
+    canvas.width = W * gdpr;
+    canvas.height = H * gdpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    gctx.setTransform(gdpr,0,0,gdpr,0,0);
+
+    GAP = H * 0.3;
+    PIPE_W = Math.max(42, W * 0.16);
+    SPEED = W * 1.05;
+    GRAVITY = H * 2.1;
+    FLAP_V = -H * 0.72;
+    bird.r = Math.max(13, W * 0.065);
+
+    drawFrame();
+  }
+  window.addEventListener('resize', function(){
+    if(!gameArea.hidden) sizeGameCanvas();
+  });
+
+  function selectProfile(profile, emoji){
+    currentProfile = profile;
+    currentEmoji = emoji;
+    overlayEmoji.textContent = emoji;
+    profilePicker.hidden = true;
+    gameArea.hidden = false;
+    liveBestEl.textContent = LB[profile] || 0;
+    sizeGameCanvas();
+    resetRound();
+  }
+
+  profileBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      selectProfile(btn.dataset.profile, btn.dataset.emoji);
+    });
+  });
+
+  switchBtn.addEventListener('click', function(){
+    running = false;
+    if(rafId) cancelAnimationFrame(rafId);
+    gameArea.hidden = true;
+    profilePicker.hidden = false;
+  });
+
+  function spawnPipe(x){
+    var minY = GAP/2 + 18;
+    var maxY = H - GAP/2 - 18;
+    var gapY = minY + Math.random() * Math.max(1, (maxY - minY));
+    pipes.push({ x:x, gapY:gapY, passed:false });
+  }
+
+  function resetRound(){
+    bird.x = W * 0.3;
+    bird.y = H * 0.45;
+    bird.vy = 0;
+    pipes = [];
+    score = 0;
+    running = false;
+    started = false;
+    liveScoreEl.textContent = '0';
+    overlay.classList.remove('hidden');
+    playBtn.textContent = 'Play';
+    drawFrame();
+  }
+
+  function startRound(){
+    bird.x = W * 0.3;
+    bird.y = H * 0.45;
+    bird.vy = 0;
+    pipes = [];
+    spawnPipe(W * 0.95);
+    spawnPipe(W * 0.95 + Math.max(170, W * 0.68));
+    score = 0;
+    liveScoreEl.textContent = '0';
+    running = true;
+    started = true;
+    overlay.classList.add('hidden');
+    lastTime = performance.now();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function loop(now){
+    var dt = Math.min((now - lastTime) / 1000, 0.032);
+    lastTime = now;
+    update(dt);
+    drawFrame();
+    if(running) rafId = requestAnimationFrame(loop);
+  }
+
+  function update(dt){
+    bird.vy += GRAVITY * dt;
+    bird.y += bird.vy * dt;
+
+    for(var i=0;i<pipes.length;i++){ pipes[i].x -= SPEED * dt; }
+    if(pipes.length && pipes[0].x < -PIPE_W) pipes.shift();
+    var last = pipes[pipes.length - 1];
+    if(last && last.x < W * 0.5){
+      spawnPipe(last.x + Math.max(170, W * 0.68));
+    }
+
+    for(var j=0;j<pipes.length;j++){
+      var p = pipes[j];
+      if(!p.passed && p.x + PIPE_W < bird.x){
+        p.passed = true;
+        score++;
+        liveScoreEl.textContent = String(score);
+      }
+      var overlapsX = bird.x + bird.r > p.x && bird.x - bird.r < p.x + PIPE_W;
+      if(overlapsX){
+        var hitsTop = bird.y - bird.r < p.gapY - GAP/2;
+        var hitsBottom = bird.y + bird.r > p.gapY + GAP/2;
+        if(hitsTop || hitsBottom){
+          endRound();
+          return;
+        }
+      }
+    }
+
+    if(bird.y - bird.r < 0){ bird.y = bird.r; bird.vy = 0; }
+    if(bird.y + bird.r > H){ endRound(); return; }
+  }
+
+  function roundRectPath(x,y,w,h,r,roundTop,roundBottom){
+    var tl = roundTop ? r : 0, tr = roundTop ? r : 0;
+    var bl = roundBottom ? r : 0, br = roundBottom ? r : 0;
+    gctx.beginPath();
+    gctx.moveTo(x+tl, y);
+    gctx.lineTo(x+w-tr, y);
+    gctx.quadraticCurveTo(x+w, y, x+w, y+tr);
+    gctx.lineTo(x+w, y+h-br);
+    gctx.quadraticCurveTo(x+w, y+h, x+w-br, y+h);
+    gctx.lineTo(x+bl, y+h);
+    gctx.quadraticCurveTo(x, y+h, x, y+h-bl);
+    gctx.lineTo(x, y+tl);
+    gctx.quadraticCurveTo(x, y, x+tl, y);
+    gctx.closePath();
+    gctx.fill();
+  }
+
+  function drawPipe(p){
+    var topH = p.gapY - GAP/2;
+    var botY = p.gapY + GAP/2;
+    var botH = H - botY;
+    var grad = gctx.createLinearGradient(p.x, 0, p.x + PIPE_W, 0);
+    grad.addColorStop(0, 'rgba(201,112,124,0.88)');
+    grad.addColorStop(1, 'rgba(216,183,132,0.88)');
+    gctx.fillStyle = grad;
+    roundRectPath(p.x, 0, PIPE_W, Math.max(0,topH), 14, false, true);
+    roundRectPath(p.x, botY, PIPE_W, Math.max(0,botH), 14, true, false);
+  }
+
+  function drawFrame(){
+    if(!W || !H) return;
+    gctx.clearRect(0,0,W,H);
+    for(var i=0;i<pipes.length;i++) drawPipe(pipes[i]);
+
+    gctx.save();
+    gctx.translate(bird.x, bird.y);
+    var angle = Math.max(-0.5, Math.min(0.9, bird.vy / (H*1.6)));
+    gctx.rotate(angle);
+    gctx.font = (bird.r * 2.1) + 'px sans-serif';
+    gctx.textAlign = 'center';
+    gctx.textBaseline = 'middle';
+    gctx.fillText(currentEmoji, 0, 0);
+    gctx.restore();
+  }
+
+  function endRound(){
+    running = false;
+    if(rafId) cancelAnimationFrame(rafId);
+    overlay.classList.remove('hidden');
+    playBtn.textContent = 'Play again';
+    submitScore(currentProfile, score);
+    liveBestEl.textContent = Math.max(score, LB[currentProfile] || 0);
+    drawFrame();
+  }
+
+  function flap(){
+    if(!currentProfile) return;
+    if(!started || !running){
+      startRound();
+      return;
+    }
+    bird.vy = FLAP_V;
+  }
+
+  playBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    flap();
+  });
+  gameWrap.addEventListener('pointerdown', function(e){
+    if(e.target === playBtn) return;
+    e.preventDefault();
+    flap();
+  });
+  window.addEventListener('keydown', function(e){
+    if(e.code === 'Space' && gameArea && !gameArea.hidden){
+      e.preventDefault();
+      flap();
+    }
+  });
+
+  initLeaderboard();
 })();
 </script>
